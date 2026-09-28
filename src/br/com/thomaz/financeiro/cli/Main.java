@@ -4,6 +4,7 @@ import br.com.thomaz.financeiro.model.Categoria;
 import br.com.thomaz.financeiro.model.TipoTransacao;
 import br.com.thomaz.financeiro.model.Transacao;
 import br.com.thomaz.financeiro.service.GerenciadorFinanceiro;
+import br.com.thomaz.financeiro.service.LeitorExtratoCSV;
 
 import java.util.List;
 import java.util.Scanner;
@@ -23,6 +24,7 @@ public class Main {
             System.out.println("1. Adicionar Transação");
             System.out.println("2. Listar Transações");
             System.out.println("3. Ver Saldo Total");
+            System.out.println("4. Importar Extrato (CVS)");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -72,7 +74,11 @@ public class Main {
                     double saldo = gerenciador.calcularSaldoTotal();
                     System.out.printf("%nSaldo Atual: R$ %.2f%n", saldo);
                     break;
-
+                case 4:
+                    System.out.print("Digite o caminho completo ou nome do arquivo CSV (ex: extrato.csv): ");
+                    String caminho = scanner.nextLine();
+                    LeitorExtratoCSV.importarCSV(caminho, gerenciador);
+                    break;
                 case 0:
                     executando = false;
                     System.out.println("Encerrando o sistema... Até mais!");
